@@ -14,9 +14,11 @@
         body {
             font-family: 'Georgia', serif;
             background: 
-                radial-gradient(ellipse at top, rgba(139, 69, 19, 0.15), transparent),
-                radial-gradient(ellipse at bottom, rgba(101, 67, 33, 0.15), transparent),
-                linear-gradient(135deg, #0a0a0a 0%, #151312 50%, #0f0f0f 100%);
+                radial-gradient(ellipse at top left, rgba(139, 69, 19, 0.08), transparent 50%),
+                radial-gradient(ellipse at top right, rgba(101, 67, 33, 0.06), transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(92, 51, 23, 0.06), transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(139, 115, 85, 0.08), transparent 50%),
+                linear-gradient(135deg, #000000 0%, #0a0a0a 25%, #050505 50%, #0a0a0a 75%, #000000 100%);
             background-attachment: fixed;
             color: #d4c5b0;
             line-height: 1.6;
@@ -31,20 +33,11 @@
             width: 100%;
             height: 100%;
             background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    rgba(212, 197, 176, 0.03) 0px,
-                    transparent 1px,
-                    transparent 2px,
-                    rgba(212, 197, 176, 0.03) 3px
-                ),
-                repeating-linear-gradient(
-                    90deg,
-                    rgba(212, 197, 176, 0.03) 0px,
-                    transparent 1px,
-                    transparent 2px,
-                    rgba(212, 197, 176, 0.03) 3px
-                );
+                radial-gradient(circle at 15% 20%, rgba(212, 197, 176, 0.04) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(245, 230, 211, 0.03) 0%, transparent 30%),
+                radial-gradient(circle at 25% 80%, rgba(139, 115, 85, 0.03) 0%, transparent 28%),
+                radial-gradient(circle at 75% 85%, rgba(212, 197, 176, 0.04) 0%, transparent 32%);
+            animation: glowPulse 15s ease-in-out infinite;
             pointer-events: none;
             z-index: 1;
         }
@@ -56,12 +49,19 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(212, 197, 176, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(139, 115, 85, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(101, 67, 33, 0.03) 0%, transparent 70%);
+            background: 
+                linear-gradient(transparent 0%, rgba(0, 0, 0, 0.1) 50%, transparent 100%);
             pointer-events: none;
             z-index: 1;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
         }
 
         nav, section, .modal, .book-container {
@@ -313,10 +313,10 @@
             justify-content: center;
             align-items: center;
             background: 
-                radial-gradient(ellipse at center, rgba(139, 69, 19, 0.2), transparent 70%),
-                radial-gradient(ellipse at top left, rgba(101, 67, 33, 0.15), transparent),
-                radial-gradient(ellipse at bottom right, rgba(92, 51, 23, 0.15), transparent),
-                linear-gradient(135deg, #0a0a0a 0%, #1a1410 50%, #0a0a0a 100%);
+                radial-gradient(ellipse at center, rgba(139, 69, 19, 0.1), transparent 70%),
+                radial-gradient(ellipse at top left, rgba(101, 67, 33, 0.06), transparent),
+                radial-gradient(ellipse at bottom right, rgba(92, 51, 23, 0.06), transparent),
+                linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
             z-index: 10000;
             perspective: 2000px;
             cursor: pointer;
@@ -330,18 +330,17 @@
             width: 100%;
             height: 100%;
             background-image: 
-                radial-gradient(circle, rgba(212, 197, 176, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            opacity: 0.5;
-            animation: backgroundMove 20s linear infinite;
+                radial-gradient(circle at 30% 40%, rgba(212, 197, 176, 0.03) 0%, transparent 40%),
+                radial-gradient(circle at 70% 60%, rgba(245, 230, 211, 0.02) 0%, transparent 45%);
+            animation: softGlow 12s ease-in-out infinite;
         }
 
-        @keyframes backgroundMove {
-            0% {
-                background-position: 0 0;
+        @keyframes softGlow {
+            0%, 100% {
+                opacity: 0.8;
             }
-            100% {
-                background-position: 50px 50px;
+            50% {
+                opacity: 1;
             }
         }
 
@@ -501,6 +500,61 @@
             display: none;
         }
 
+        /* Card Entrance Animations */
+        .criticism-card {
+            opacity: 0;
+            transform: translateY(60px);
+        }
+
+        .criticism-card.animate {
+            animation: fadeInUp 1.5s ease-out forwards;
+        }
+
+        .criticism-card.animate:nth-child(1) { animation-delay: 0.3s; }
+        .criticism-card.animate:nth-child(2) { animation-delay: 0.6s; }
+        .criticism-card.animate:nth-child(3) { animation-delay: 0.9s; }
+        .criticism-card.animate:nth-child(4) { animation-delay: 1.2s; }
+        .criticism-card.animate:nth-child(5) { animation-delay: 1.5s; }
+        .criticism-card.animate:nth-child(6) { animation-delay: 1.8s; }
+
+        .literary-card {
+            opacity: 0;
+            transform: scale(0.8) rotateY(-15deg);
+        }
+
+        .literary-card.animate {
+            animation: fadeInScale 1.5s ease-out forwards;
+        }
+
+        .literary-card.animate:nth-child(1) { animation-delay: 0.3s; }
+        .literary-card.animate:nth-child(2) { animation-delay: 0.6s; }
+        .literary-card.animate:nth-child(3) { animation-delay: 0.9s; }
+        .literary-card.animate:nth-child(4) { animation-delay: 1.2s; }
+        .literary-card.animate:nth-child(5) { animation-delay: 1.5s; }
+        .literary-card.animate:nth-child(6) { animation-delay: 1.8s; }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.8) rotateY(-15deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotateY(0deg);
+            }
+        }
+
         @keyframes fadeOut {
             0% {
                 opacity: 1;
@@ -597,7 +651,7 @@
             
             <!-- Book Cover (Front) -->
             <div class="book-cover">
-                <h1 class="book-cover-title">Great Books<br>E-Portfolio</h1>
+                <h1 class="book-cover-title">Great Books</h1>
                 <p class="book-cover-author">Jet Ace M. Tandaan</p>
                 <p class="click-instruction">Click to open</p>
             </div>
@@ -618,7 +672,7 @@
 
     <!-- Home / Introduction Section -->
     <section id="home">
-        <h1>Great Books E-Portfolio</h1>
+        <h1>The Great Books</h1>
         
         <h2>About Me as a Reader and Learner</h2>
         <p>Hello and welcome to my e-Portfolio. My name is <strong>Jet Ace M. Tandaan</strong>, and I am a student who enjoys reading and discovering new ideas through literature. In Great Books, I learned to look at stories with more attention and to think about how they connect to real life. I read with curiosity and to understand how writers share their messages and how they evoke messages to readers.</p>
@@ -629,7 +683,7 @@
         <h2>Purpose of This Website</h2>
         <p>The purpose of this website is to present my portfolio of different literary analyses from the Great Books course. It includes the essays and analysis I wrote while studying the subject. My goal is to show how my reading skills and interpretations have developed over time. This portfolio highlights my work and demonstrates what I learned from each piece of literature. This portfolio also includes my whole understanding and knowledge I gained through studying the subject.</p>
         
-        <h2 style="margin-top: 4rem;">Lenses</h2>
+        <h2 style="margin-top: 3rem;">Lenses</h2>
         
         <div class="criticism-grid">
             <div class="criticism-card">
@@ -963,14 +1017,64 @@
             }
         }
 
-        // Smooth scrolling
+        // Smooth scrolling with animation trigger
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                const targetSection = this.getAttribute('href');
+                
+                // Reset animations before scrolling
+                if (targetSection === '#home') {
+                    resetCardsAnimation('.criticism-card');
+                } else if (targetSection === '#literary') {
+                    resetCardsAnimation('.literary-card');
+                }
+                
+                document.querySelector(targetSection).scrollIntoView({
                     behavior: 'smooth'
                 });
+                
+                // Trigger animation after scroll
+                setTimeout(() => {
+                    if (targetSection === '#home') {
+                        triggerCardsAnimation('.criticism-card');
+                    } else if (targetSection === '#literary') {
+                        triggerCardsAnimation('.literary-card');
+                    }
+                }, 500);
             });
+        });
+
+        // Function to reset card animations
+        function resetCardsAnimation(selector) {
+            const cards = document.querySelectorAll(selector);
+            cards.forEach(card => {
+                card.classList.remove('animate');
+                card.style.animation = 'none';
+                // Force reflow
+                void card.offsetWidth;
+            });
+        }
+
+        // Function to trigger card animations
+        function triggerCardsAnimation(selector) {
+            const cards = document.querySelectorAll(selector);
+            cards.forEach(card => {
+                card.classList.add('animate');
+            });
+        }
+
+        // Initial animation on page load
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                triggerCardsAnimation('.criticism-card');
+                // Also make literary cards visible on initial load
+                const literaryCards = document.querySelectorAll('.literary-card');
+                literaryCards.forEach(card => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1) rotateY(0deg)';
+                });
+            }, 100);
         });
     </script>
 </body>
